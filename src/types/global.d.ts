@@ -42,7 +42,7 @@ declare module 'commander' {
     version(version: string): this;
     argument(name: string, description: string): this;
     option(flags: string, description: string): this;
-    action(fn: (filePath: string, options: unknown) => void | Promise<void>): this;
+    action(fn: (filePath: string, options: Record<string, unknown>) => void | Promise<void>): this;
     parse(): void;
   }
 }

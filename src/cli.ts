@@ -16,7 +16,7 @@ program
   .option('-m, --metadata', 'Include metadata in output')
   .option('-j, --json', 'Output as JSON')
   .option('-o, --output <file>', 'Write output to file instead of stdout')
-  .action(async (filePath: string, options: { metadata?: boolean; json?: boolean; output?: string }) => {
+  .action(async (filePath: string, options: Record<string, unknown>) => {
     try {
       const resolvedPath = resolve(filePath);
       const fileType = getFileType(filePath);
@@ -27,7 +27,7 @@ program
 
       const buffer = readFileSync(resolvedPath);
       const parseOptions = {
-        includeMetadata: options.metadata ?? false,
+        includeMetadata: Boolean(options.metadata),
         normalizeWhitespace: true,
       };
 
@@ -42,7 +42,7 @@ program
         ? JSON.stringify(result, null, 2)
         : result.text;
 
-      if (options.output) {
+      if (options.output && typeof options.output === 'string') {
         const fs = await import('node:fs/promises');
         await fs.writeFile(options.output, output, 'utf-8');
         console.log(chalk.green(`✓ Output written to ${options.output}`));
