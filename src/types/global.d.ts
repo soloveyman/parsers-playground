@@ -7,7 +7,7 @@ declare module 'mammoth' {
   
   interface ExtractRawTextResult {
     value: string;
-    messages: any[];
+    messages: unknown[];
   }
   
   export function extractRawText(options: ExtractRawTextOptions): Promise<ExtractRawTextResult>;
@@ -16,7 +16,7 @@ declare module 'mammoth' {
 declare module 'xlsx' {
   export interface WorkBook {
     SheetNames: string[];
-    Sheets: { [sheetName: string]: any };
+    Sheets: { [sheetName: string]: unknown };
   }
   
   export interface WritingOptions {
@@ -26,9 +26,9 @@ declare module 'xlsx' {
   
   export const utils: {
     book_new(): WorkBook;
-    aoa_to_sheet(data: any[][]): any;
-    book_append_sheet(workbook: WorkBook, worksheet: any, name: string): void;
-    sheet_to_json<T>(sheet: any, options?: { header?: number; defval?: any }): T[];
+    aoa_to_sheet(data: unknown[][]): unknown;
+    book_append_sheet(workbook: WorkBook, worksheet: unknown, name: string): void;
+    sheet_to_json<T>(sheet: unknown, options?: { header?: number; defval?: unknown }): T[];
   };
   
   export function read(buffer: Buffer, options: { type: 'buffer' }): WorkBook;
@@ -42,7 +42,7 @@ declare module 'commander' {
     version(version: string): this;
     argument(name: string, description: string): this;
     option(flags: string, description: string): this;
-    action(fn: (filePath: string, options: any) => void | Promise<void>): this;
+    action(fn: (filePath: string, options: unknown) => void | Promise<void>): this;
     parse(): void;
   }
 }

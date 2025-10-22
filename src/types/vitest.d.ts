@@ -2,10 +2,10 @@
 
 declare global {
   namespace Vi {
-    interface Assertion<T = any> {
+    interface Assertion<T = unknown> {
       toBe(expected: T): void;
       toEqual(expected: T): void;
-      toContain(expected: any): void;
+      toContain(expected: unknown): void;
       toMatch(expected: RegExp | string): void;
       toBeDefined(): void;
       toBeUndefined(): void;
@@ -14,7 +14,7 @@ declare global {
       toBeFalsy(): void;
       toBeGreaterThan(expected: number): void;
       toBeLessThan(expected: number): void;
-      toBeInstanceOf(expected: any): void;
+      toBeInstanceOf(expected: unknown): void;
       toThrow(expected?: string | RegExp | Error): void;
       rejects: {
         toThrow(expected?: string | RegExp | Error): Promise<void>;
